@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Mon Nov 27 11:37:18 CET 2017
+markTmpDer=true
+builderNum=2
+outputDir=out
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=TSM_EmbHardw.tex
+outputFile=TSM_EmbHardw.pdf
+langSpell=en
+markDer=true
+srcDir=
