@@ -1,12 +1,103 @@
-\section{Avalon Bus}
-	\subsection{Signals}
+\section{Avalon Interface}
+	The Avalon interface allows you to interconnect components in Intel FPGAs using Qsys via the Avalon Bus.
 	
-		\begin{longtable}{|p{0.2\textwidth}||p{0.75\textwidth}|}
-			\hline
-			Begriff
-				& Erklärung\\
-			\hhline{|=#=|}
-			Sozialtheorie
-				& Stellt sich die Frage "Wie sollen wir leben?".\\
-			\hline
-		\end{longtable}
+	\subsection{Interface Types \avIntSp{4}}
+		A single component can have any number of Avalon Interfaces, and also multiple instances of the same interface type. The available interface types are:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+				\hline
+				Avalon Streaming Interface
+					& Supports the unidirectional flow of data.\\
+				\hline
+				Avalon Memory Mapped Interface
+					& Supports address-based read/write behaviour for master-slave connections.\\
+				\hline
+				Avalon Avalon Conduit Interface
+					& Supports individual signals or signal groups that do not finto any other Avalon type.
+					These signals can be interconnected inside a Qsys system or exported to other modules or FPGA pins.\\
+				\hline
+				Avalon Tri-State Conduit Interface
+					& Supports off-chip peripherals. Multiple peripherals can share pins through signal multiplexing.\\
+				\hline
+				Avalon Interrupt Interface
+					& Supports interrupts in order to signal events to other components.\\
+				\hline
+				Avalon Clock Interface
+					& Drives or receives clocks.\\
+				\hline
+				Avalon Reset Interface
+					& drives or receives resets.\\
+				\hline	
+			\end{tabular}
+			\caption{Available Avalon Interface Types}
+		\end{table}
+		
+	\subsection{Avalon Memory Mapped Interface \avIntSp{13}}
+		Memory mapped interfaces are components that are mapped into the global memory space. Typically the necessary amount of memory equals the space required by the component's registers. The system allocates the amount of memory to the component as can be addressed by the width of the address bus input. If the component is a memory mapped memory, the address directly represents the address location of the data (not a register).
+		
+		\subsubsection{Avalon MM Signals \avIntSp{15-19}}
+			Some remarks to Avalon MM Signals. For a complete listing see \avIntSp{15-19}.
+			\begin{longtable}{|p{0.15\linewidth}||p{0.25\linewidth}|p{0.5\linewidth}|}					
+				\hline
+				\textbf{Signal}
+					& \textbf{Description}
+					& \textbf{Remarks}\\
+				\hhline{|=#=|=|}
+				\texttt{address}
+					& The address which is read or written to. 
+					&   \textbf{Master:} The global address space unique address needs to be set.
+					
+					  	\textbf{Slave:} Only the component internally unique address (last few bits) are visible at the slave address input.\\
+				\hline
+				\texttt{write}
+					& Signals a write transfer.
+					& At the rising edge all signals necessary for the transfer are asserted.\\
+				\hline
+				\texttt{writeData}
+					& Data to write.
+					& Data is set for one cycle.\\
+				\hline
+				\texttt{read}
+					& Signals a read transfer.
+					& At the rising edge all signals necessary for the transfer are asserted.\\
+				\hline
+				\texttt{readData}
+					& Data being read.
+					& Data is set for one cycle.\\
+				\hline
+				\texttt{waitRequest}
+					& Signals that transfer can not be responded to yet.
+					& Asserted by the slave when it is unable to respond to a \texttt{read} or \texttt{write} request. Forces the master to wait until slave is ready. Master must not change output to the slave until \texttt{waitRequest} is deasserted.
+				\hline
+				\texttt{readDataValid}
+					& When asserted, \texttt{readData} contains valid data.
+					& Must be asserted for $n$ clock cycles (not necessarily consecutively) for each of the $n$ \texttt{readData} terms of a burst transfer.\\
+				\hline
+			\end{longtable}
+			
+		\subsubsection{Read and Write Transfers with \texttt{WaitRequest} \avIntSp{23}}		
+			\begin{enumerate}
+				\item \texttt{address}, \texttt{byteenable} and \texttt{read} are asserted after the rising edge of \texttt{clk}.
+				\item Slave asserts \texttt{waitRequest}.
+				\item Master waits.
+				\item Slave deasserts \texttt{waitRequest} after the rising edge of clk. \texttt{readData} and \texttt{response} are set by the slave at the same time.
+				\item \texttt{readData} and \texttt{response} are read by the master, completing the transfer.
+				  
+				\item \texttt{address}, \texttt{byteenable} and \texttt{w} are asserted after the rising edge of \texttt{clk}.
+				\item Slave asserts \texttt{waitRequest}.
+				\item Master waits.
+				\item Slave deasserts \texttt{waitRequest} after the rising edge of clk.
+				\item Slave reads \texttt{writeData}. \texttt{writeData} is valid until the next rising edge of \texttt{clk} after \texttt{waitRequest} is deasserted.
+			\end{enumerate}
+
+		\subsubsection{Read and Write Transfers \avIntSp{23}}
+		\subsubsection{Avalon MM Slave}
+			
+			\lstinputlisting[style=VHDL, caption=simplePIO]{./src/simplePIO.vhdl}
+			
+		\subsubsection{Avalon MM Master}
+		
+		
+		
+			
