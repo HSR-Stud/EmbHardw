@@ -167,3 +167,37 @@
 			
 	\subsection{Cache Locking}
 		\todo{Fill this section}
+		
+	\subsection{Cache Aware Programming}
+		\subsubsection{Software Pre-Fetching \weekPageDoran{3}{27}}
+			\begin{itemize}
+			  \item Some compilers offer pre-fetching and pre-fetching instruction insertion.
+			  \item Manual insertion generally preferred.
+			\end{itemize}
+			
+		\lstinputlisting[style=CPP, caption=Software Pre-Fetching]{./src/prefetch.cpp}
+		
+		\subsubsection{Hardware Pre-Fetching \weekPageDoran{3}{31}}
+			A memory access is registered, on the second access the stride (difference between second and first address) is also registered. If the hardware thinks the stride is stable then it starts pre-fetching blocks with this stride.
+			
+		\subsubsection{Data Access Optimisation \weekPageDoran{3}{34-37}}		
+			Minimise cache misses.
+			
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+					\hline
+					\textbf{Loop Interchange}
+						& Interchange loop indices. Instead of iterating row-wise iterate column-wise or the other way around.\\
+					\hline
+					\textbf{Loop Fusion}
+						& Combine multiple loops into one. \\
+					\hline
+					\textbf{Loop Blocking or Loop Tiling}
+						& Instead of iterating column or row wise, iterate in blocks or tiles. (This causes more loops than row or column wise)\\
+					\hline
+				\end{tabular}
+				\caption{Loop Transformations}
+			\end{table}
+			
+			\todo{Add source code and/or images for loop transformations.}
