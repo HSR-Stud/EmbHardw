@@ -1,0 +1,169 @@
+\section{Cache \weekDoran{3}}
+	The cache is completely transparent to the user. It can not explicitly be filled (e.g. using a DMA). The only way to fill the cache is by executing code or data (except for dirty tricks).
+	
+	The cache is used to store often executed code or data in a closely located storage.
+	
+	\subsection{Cache Types}
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+				\hline
+				Level 1 Cache
+					& Cache that is located closest to the processor. Usually on-chip memory. Also called first level, primary or L1 cache.\\
+				\hline
+				Level 2 Cache
+					& Located downstream of L1 Cache and usually off-chip memory. Also called second level, secondary or L2 cache.\\
+				\hline
+				Level 3 Cache
+					& Located downstream of L2 Cache and usually off-chip memory. Also called third level, tertiary or L3 cache.\\
+				\hline	
+			\end{tabular}
+			\caption{Cache Types}
+		\end{table}
+		
+	\subsection{Cache Behaviour \weekPageDoran{3}{9}}
+	
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+				\hline
+				\multicolumn{2}{|c|}{Controller is looking for a memory item}\\
+				\hline
+				\textbf{Cache hit}
+					& Memory item is found in cache. Controller can be served faster than without cache due to the its proximity to the controller.\\
+				\hline
+				\textbf{Cache miss}
+					& Memory item is not found in cache. Controller is served slower than without Cache due to the checking of the cache before looking in the memory. The \textbf{cache directory} will decide whether a copy of the required datum is in the memory and the \textbf{cache controller} will manage the interaction with system memory, formulated by \textbf{cache policies}. When loading data, it will also be loaded into the cache.\\
+				\hline
+			\end{tabular}
+			\caption{Cache Behaviour}
+		\end{table}
+		
+	\subsection{Cache Structure \weekPageDoran{3}{9}}
+		\subsubsection{Cache Addressing in Direct Mapped Cache}
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+					\hline
+					\textbf{Line number}
+						& Represents the lowest significant bits of the main memory address. It is unique over the whole cache and thus the size depends on the cache. Therefore only one datum of each with the same address in the main memory can be represented in the cache.\\
+					\hline
+					\textbf{Address Tag}
+						& Represents the most significant bits of the main memory address (Complete address without cache line number).\\
+					\hline
+				\end{tabular}
+				\caption{Cache Addressing in Direct Mapped Cache}
+			\end{table} 
+			
+		\subsubsection {1 Word}
+		
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{p{0.15\linewidth}|p{0.06\linewidth}|p{0.06\linewidth}|p{0.06\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
+					\cline{2-6}
+						\textbf{Line number}
+							& \textbf{Valid}
+							& \textbf{Dirty}
+							& \textbf{Locked}
+							& \textbf{Address tag}
+							& \textbf{Data}\\
+					\cline{2-6}
+						0x00
+							& 1
+							& 1
+							& 0
+							& Address tag 0
+							& Valid data\\
+					\cline{2-6}
+						0x01
+							& 0
+							& 1
+							& 0
+							& N/A
+							& Garbage\\
+					\cline{2-6}
+				\end{tabular}
+				\caption{1 Word cache structure}
+			\end{table}	
+			
+		\subsubsection {2 Word}
+		
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{p{0.15\linewidth}|p{0.06\linewidth}|p{0.06\linewidth}|p{0.06\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
+					\cline{2-6}
+						\textbf{Line number}
+							& \textbf{Valid}
+							& \textbf{Dirty}
+							& \textbf{Locked}
+							& \textbf{Address tag}
+							& \textbf{Data}\\
+					\cline{2-6}
+						0x00
+							& 1
+							& 1
+							& 0
+							& Address tag 0
+							& Valid data\\
+					\cline{2-6}
+						0x01
+							& 
+							& 
+							& 
+							& 
+							& Valid data\\
+					\cline{2-6}
+						0x02
+							& 0
+							& 1
+							& 0
+							& N/A
+							& Garbage\\
+					\cline{2-6}
+						0x03
+							& 
+							& 
+							& 
+							& 
+							& Garbage\\
+					\cline{2-6}
+				\end{tabular}
+				\caption{2 Word cache structure}
+			\end{table}	
+
+	\subsection{Cache Policies}
+		\subsubsection{General}
+			A \textbf{line fill/update} is when a cache line is updated with a new datum. A \textbf{compulsory line fill/update} is such an update that could not have been avoided using a better cache policy.
+			
+		\subsubsection{Reading from Cache}
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+					\hline
+					\textbf{Look-aside implementation}
+						& All signals are access main memory, regardless of hit or miss.\\
+					\hline
+					\textbf{Look-through / in-line implementation}
+						& Cache controller decides whether to initiate system memory read/write. Massively reduces CPU-required bandwidth at the cost of \textbf{lookup penalty} (time required to decide that system memory access is required). \\
+					\hline
+				\end{tabular}
+				\caption{Cache Read Policies}
+			\end{table}
+			
+		\subsubsection{Writing to Cache}
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+					\hline
+					\textbf{Write-through policy}
+						& Both the cache and system memory are updated in order to avoid cache coherence problems.\\
+					\hline
+					\textbf{Copy-back policy}
+						& Only the cache data is updated. This causes cache coherence problems. Simplest method is to set a dirty bit in the cache. When a cache line is replaced the system memory is updated with the new value in the cache (Data is evicted).\\
+					\hline
+				\end{tabular}
+				\caption{Cache Write Policies}
+			\end{table}
+			
+	\subsection{Cache Locking}
+		\todo{Fill this section}
