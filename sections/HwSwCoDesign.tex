@@ -26,7 +26,7 @@
 		
 	\subsection{Scheduling}
 		\begin{itemize}
-		  \item Indicates how much time is necessary for each of the tasks, how much time is left until the cycle time is is reached and which system architecture element is affected by which task.
+		  \item The scheduling diagram indicates how much time is necessary for each of the tasks, how much time is left until the cycle time is is reached and which system architecture element is affected by which task.
 		  \item If the same task is affected by multiple elements, that is indicated by showing that this runs at the same time, not after one another. Otherwise it should be split into multiple tasks.
 		  \item The tasks in the scheduling diagram are the same tasks as drawn in the left part of the binding diagram.
 		\end{itemize}
@@ -35,7 +35,7 @@
 		
 		\subsubsection{Scheduling Time Measurements}
 		\begin{table}[H]\centering
-			\begin{tabular}{|p{0.15\linewidth}|p{0.8\linewidth}|}
+			\begin{tabular}{|p{0.25\linewidth}|p{0.7\linewidth}|}
 				\hline
 					\textbf{Slack}
 						& The time that is left until the maximum cycle time is reached.\\
@@ -43,6 +43,23 @@
 					\textbf{Idle time}
 						& The time that the CPU is waiting for other elements to finish their tasks.\\
 				\hline
+					\textbf{Maximum task scaling factor}
+						& The factor, by which the time spent in the CPU's tasks can be multiplied so that the idle time is exactly what the other elements require while the CPU is idle: \newline 
+						$T_{IdleNew} = T_{CycleMax} - x \cdot T_{CPU} = T_{OtherElem}$ \newline 
+						{\Large $x = \frac{T_{CycleMax} - T_{OtherElem}}{T_{CPU}}$} \\
+				\hline
 			\end{tabular}
 		\end{table}
 		
+		\subsubsection{List Scheduling}
+			The algorithm of list scheduling goes as follows:
+			
+			\begin{enumerate}
+				\item Order tasks with decreasing priority.
+				\item Repeat until a valid schedule is obtained:
+				\begin{enumerate}
+				  \item Select the task with the highest priority.
+				  \item Select a resource to accommodate this task.
+				  \item If no resource can be found, select next task in the list.
+				\end{enumerate}
+			\end{enumerate}
