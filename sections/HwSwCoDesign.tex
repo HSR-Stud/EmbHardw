@@ -1,0 +1,48 @@
+\section{HW/SW Co-Design \weekDoran{1}}
+	\subsection{System Architecture Specification}
+	
+		\begin{itemize}
+		  \item Specifies the individual components of a system.
+		  \item Arrows indicate data flow
+		  \item {\color{red}\textbf{THE BUS IS AN ACTIVE ELEMENT!!!}}
+		  \item Elements that can compute things but are only used as passive components (like memory) are drawn as memories.
+		\end{itemize}
+		
+		\begin{table}[H]
+			\begin{tabular}{cc}
+				\includegraphics[width=0.45\textwidth]{./pictures/systemArchDiagram.png}
+					& \includegraphics[width=0.45\textwidth]{./pictures/systemArchKey.png}
+			\end{tabular}
+		\end{table}
+		
+	\subsection{Bindings}
+		\begin{itemize}
+		  \item The left part of the binding diagram shows the program flow, with each task as a bubble and arrows that indicate the flow. 
+		  \item The right part of the binding diagram shows the system elements, with each element as a bubble. The arrows between the elements are the same data flow connections as in the system architecture diagrams.
+		  \item The arrows between the left and the right side of the binding diagram indicate which elements are affected by which tasks.
+		\end{itemize}
+		
+		\includegraphics[width=0.45\textwidth]{./pictures/bindings.png}
+		
+	\subsection{Scheduling}
+		\begin{itemize}
+		  \item Indicates how much time is necessary for each of the tasks, how much time is left until the cycle time is is reached and which system architecture element is affected by which task.
+		  \item If the same task is affected by multiple elements, that is indicated by showing that this runs at the same time, not after one another. Otherwise it should be split into multiple tasks.
+		  \item The tasks in the scheduling diagram are the same tasks as drawn in the left part of the binding diagram.
+		\end{itemize}
+		
+		\includegraphics[width=0.45\textwidth]{./pictures/scheduling.png}
+		
+		\subsubsection{Scheduling Time Measurements}
+		\begin{table}[H]\centering
+			\begin{tabular}{|p{0.15\linewidth}|p{0.8\linewidth}|}
+				\hline
+					\textbf{Slack}
+						& The time that is left until the maximum cycle time is reached.\\
+				\hline
+					\textbf{Idle time}
+						& The time that the CPU is waiting for other elements to finish their tasks.\\
+				\hline
+			\end{tabular}
+		\end{table}
+		
