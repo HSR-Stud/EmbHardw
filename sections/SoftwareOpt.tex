@@ -1,0 +1,32 @@
+\section{Software Optimisations \weekDoran{2}}
+	\subsection{Loop Optimisation \weekPageDoran{2}{20-24}}				
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+					\hline
+					\textbf{Loop Unrolling/Unwinding}
+						& Decrease the number of iterations in a loop by manually executing more than just one of the iterations (i.e. increase step size of the loop to $N$ and do the same operation $N$ times within the loop). Thereby the amount of testing for end of loop condition and pointer arithmetic is decreased. If the loop is completely unrolled, the loop is removed completely and each iteration is inserted one after another.\newline
+						\textbf{Loop overhead:}\newline
+						\begin{itemize}
+						  \item End of loop loop condition check ($\sim 1$ CPU cycle)
+						  \item Jumps ($\sim 7$ CPU cycles if taken, $1$ if not)
+						  \item Increment loop index ($\sim 1$ CPU cycle)
+						\end{itemize}\\
+					\hline
+					\textbf{Loop Fusion}
+						& Combining multiple loops into one.\\
+					\hline
+					\textbf{Loop Peeling}
+						& Take first or last iterations out of loops to simplify.\\
+					\hline
+					\textbf{Loop Hoisting}
+						& Take invariant condition out of loop (i.e. something that doesn't change once you're in the loop).\\
+					\hline
+			\end{tabular}
+			\caption{Loop Optimisations}
+		\end{table}
+		
+		\todo{Add source code and/or images for loop transformations.}
+		
+	\subsection{In-lining}
+		Replacing the function call with the body of the function. Excess inlining can cause speed issues due to code taking too much space in the memory (or cache).

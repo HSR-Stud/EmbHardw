@@ -1,0 +1,106 @@
+\section{Scheduling \weekDoran{2}}
+	\begin{itemize}
+	  \item The scheduling diagram indicates how much time is necessary for each of the tasks, how much time is left until the cycle time is is reached and which system architecture element is affected by which task.
+	  \item If the same task is affected by multiple elements, that is indicated by showing that this runs at the same time, not after one another. Otherwise it should be split into multiple tasks.
+	  \item The tasks in the scheduling diagram are the same tasks as drawn in the left part of the binding diagram.
+	\end{itemize}
+	
+	\includegraphics[width=0.45\textwidth]{./pictures/scheduling.png}
+	
+	\subsection{Scheduling Time Measurements}
+	\begin{table}[H]\centering
+		\begin{tabular}{|p{0.25\linewidth}|p{0.7\linewidth}|}
+			\hline
+				\textbf{Slack}
+					& The time that is left until the maximum cycle time is reached.\\
+			\hline
+				\textbf{Idle time}
+					& The time that the CPU is waiting for other elements to finish their tasks.\\
+			\hline
+				\textbf{Maximum task scaling factor}
+					& The factor, by which the time spent in the CPU's tasks can be multiplied so that the idle time is exactly the time that the other elements require while the CPU is idle: \newline 
+					{\Large $T_{IdleNew} = T_{CycleMax} - x \cdot T_{CPU} = T_{OtherElem}$} \newline 
+					{\Large $x = \frac{T_{CycleMax} - T_{OtherElem}}{T_{CPU}}$} \newline
+					This implies that the complete cycle time is being used!\\
+			\hline
+		\end{tabular}
+	\end{table}
+	
+	\subsection{List Scheduling}
+		The algorithm of list scheduling goes as follows:
+		
+		\begin{enumerate}
+			\item Order tasks with decreasing (static) priority.
+			\item Repeat until a valid schedule is obtained:
+			\begin{enumerate}
+			  \item Select the task with the highest priority.
+			  \item Select a resource to accommodate this task.
+			  \item If no resource can be found, select next task in the list.
+			\end{enumerate}
+		\end{enumerate}
+		
+		\begin{table}[H]\centering
+			\begin{tabular}{p{0.425\linewidth}p{0.425\linewidth}}
+				\includegraphics[scale=0.8]{./pictures/listSchedDiag.png}
+				& \includegraphics[scale=0.8]{./pictures/listSched.png}\\
+			\end{tabular}
+		\end{table}
+
+	\subsection{First Come First Served Scheduling}
+		Is a non-preemptive scheduling technique. Starvation is not an issue, since there is no priority assigned to tasks. However, fairness is an issue because long tasks dominate.
+		\begin{figure}[H]\centering
+			\includegraphics[scale=0.6]{./pictures/firstComeFirstServe.png}
+		\end{figure}
+			
+	\subsection{Round Robin Scheduling}
+		Round Robin scheduling is in essence a FIFO with preemption. Represents Time Division multiplexing in HW terms.
+		
+		The execution time is divided up into time slices, each task gets to run for a time slice, after which the next task is allowed to do the same. This algorithm is starvation-free.
+
+		Conditions for operation:
+		\begin{itemize}
+		  \item Tasks need to be preemptive
+		\end{itemize}
+		
+		\begin{figure}[H]\centering
+			\includegraphics[scale=0.6]{./pictures/roundRobin.png}
+		\end{figure}
+		
+	\subsection{Rate Monotonic Scheduling}
+		Rate monotonic scheduling assigns a higher priority the highest repetition rate of a task, i.e. a task that has the shortest period has the highest priority. It is a preemptive scheduling technique.
+		
+		Conditions for operation:
+		\begin{itemize}
+		  \item Tasks need to be preemptive
+		  \item Tasks need deterministic deadlines
+		\end{itemize}
+		
+		A sufficient (but not necessary) condition for a set of tasks with unique periods to be schedulable is:
+		
+		\begin{equation*}
+			\begin{aligned}
+				U &= \sum_{i=1}^{n} \frac{C_i}{T_i} \leq n(\sqrt[n]{2}-1)\\
+				U &= \text{CPU utilisation}\\
+				n &= \text{Number of tasks}\\
+				C_{i} &= \text{Computation time}
+				T_{i} &= \text{Release period (one period before the deadline)}\\
+			\end{aligned}
+		\end{equation*}
+		
+		Since this condition is not necessary, it means that a well designed system could still schedule these tasks with a higher CPU utilisation.
+		
+		\begin{itemize}
+		  \item At $t = 0$ all periods start running.
+		  \item A task is only interrupted if a task with higher priority is in the queue.
+		  \item A task leaves the queue when it is executed to completion or when its period starts again.
+		\end{itemize}
+
+		\begin{table}[H]\centering
+			\begin{tabular}{p{0.7\linewidth}p{0.25\linewidth}}
+				\includegraphics[scale=0.45]{./pictures/rateMonotonicSched.png}
+					& \raisebox{1.25cm}{\includegraphics[scale=0.4]{./pictures/rateMonotonicCiTi.png}}\\
+			\end{tabular}
+		\end{table}
+		
+	\subsection{Voltage Scheduling}	
+		\todo{Add Voltage Scheduling}
