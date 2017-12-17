@@ -1,4 +1,48 @@
 \section{Software Optimisations \weekDoran{2}}
+	\subsection{CPU Cycle Time Assumptions For Assembly Instructions}
+		{\color{red}\textbf{This is only a rough reference, cycle times depend on many things like architecture, memory proximity and argument types!!}}
+		
+		\begin{longtable}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+				\hline
+				\textbf{Instruction}
+					& \textbf{Assumed Cycle Time}\\
+				\hhline{|=|=|}
+				\texttt{MOVE}
+					& $1$\\
+				\hline
+				Load instructions (\texttt{LW, LOAD, LEA})
+					& $1$, depending on memory location (or distance)\\
+				\hline
+				\texttt{CMP}
+					& $1$\\
+				\hline
+				\texttt{ADD}
+					& $1$\\
+				\hline
+				\texttt{SUB}
+					& $1$\\
+				\hline
+				\texttt{MUL}
+					& $3$\\
+				\hline
+				\texttt{DIV}
+					& $30..80$\\
+				\hline
+				\texttt{AND, OR, XOR}
+					& $1$\\
+				\hline
+				Arithmetic shifts (\texttt{ASR/SAR, ASL/SAL})
+					& $1$\\
+				\hline
+				\texttt{CMP}
+					& $1$\\
+				\hline
+				Jumps 
+					& $7$ if taken, $1$ if not\\
+				\hline
+				\caption{Assumed Cycle Times for Execution Time Calculations}
+		\end{longtable}
+	
 	\subsection{Loop Optimisation \weekPageDoran{2}{20-24}}				
 		\begin{table}[H]
 			\centering

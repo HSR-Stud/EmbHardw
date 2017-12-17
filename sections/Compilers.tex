@@ -1,0 +1,32 @@
+\section{Compilers \weekDoran{2}}
+	\subsection{Translation Process}
+	
+		\begin{table}[H]\centering
+			\begin{tabular}{p{0.425\linewidth}p{0.425\linewidth}}
+				\includegraphics[scale=0.4]{./pictures/translation.png}
+					& \includegraphics[scale=0.4]{./pictures/analysisSynthesis.png}\\
+			\end{tabular}
+		\end{table}
+
+		\begin{table}[H]\centering
+			\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+				\hline
+				\textbf{Lexical Analysis}
+					& Scanning the programme and splitting into symbols.\\
+				\hline
+				\textbf{Syntactic Analysis}
+					& Parsing symbol sequences and construction of sentences.\newline
+					sentences are described by a context-free grammar.\\
+				\hline
+				\textbf{Semantic Analysis}
+					& Make sure the program parts "reasonably" fit together, eg. type casts.\\
+				\hline
+				\textbf{Intermediate Code}
+					& Machine independent \textrightarrow\ simplified retargeting.\\
+				\hline
+				\textbf{Optimisation}
+					& Both intermediate and target code can be optimized.\\
+				\hline
+			\end{tabular}
+		\end{table}
+			
