@@ -1,9 +1,9 @@
 // C/C++ syntax: __builtin_custom_<return type>n<parameter types>
 
 // Return and parameter type abbreviations:
-// i—int
-// f—float
-// p—void *
+// i?int
+// f?float
+// p?void *
 
 // Example from system.h
 void __builtin_custom_nff (int n, float dataa, float datab);
