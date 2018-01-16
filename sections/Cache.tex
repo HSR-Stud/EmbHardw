@@ -202,3 +202,34 @@
 			\end{table}
 			
 			\todo{Add source code and/or images for loop transformations.}
+			
+	\subsection{Cache Coherence}
+		\subsubsection{Cache Snooping Protocol MSI}
+			\begin{table}[H]\centering
+				\begin{tabular}{|>{\bfseries}p{0.1\textwidth}|p{0.36\textwidth}|>{\bfseries}p{0.1\textwidth}|p{0.36\textwidth}|}
+					\hline
+					\multicolumn{2}{|l|}{\textbf{Memory block states}}
+						& \multicolumn{2}{|l|}{\textbf{Cache line states}}\\
+					\hline
+					Clean
+						& In one or more caches and up-to-date in memory.
+						& Shared
+						& The block is unmodified and exists in read-only state in at least one cache.\\
+					\hline
+					Dirty
+						& In exactly one cache. (updated in cache, not in memory)
+						& Invalid
+						& The block is either not present in the current cache or has been invalidated. It must be fetched from memory.\\
+					\hline
+					Uncached
+						& In no caches.
+						& Modified/\newline\ Exclusive
+						& The block has been modified in the cache, and not updated in the memory yet.\\
+					\hline
+				\end{tabular}
+			\end{table}
+			
+			\begin{figure}[H]\centering
+				\includegraphics[scale=0.5]{./pictures/MSIProtocol.png}
+				\caption{MSI Protocol cache line states}
+			\end{figure}
