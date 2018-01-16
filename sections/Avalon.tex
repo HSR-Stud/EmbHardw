@@ -5,28 +5,28 @@
 		A single component can have any number of Avalon Interfaces, and also multiple instances of the same interface type. The available interface types are:
 		\begin{table}[H]
 			\centering
-			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+			\begin{tabular}{|>{\bfseries}p{0.3\linewidth}|p{0.65\linewidth}|}
 				\hline
-				Avalon Streaming Interface
+				Streaming Interface
 					& Supports the unidirectional flow of data.\\
 				\hline
-				Avalon Memory Mapped Interface
+				Memory Mapped Interface
 					& Supports address-based read/write behaviour for master-slave connections.\\
 				\hline
-				Avalon Avalon Conduit Interface
+				Conduit Interface
 					& Supports individual signals or signal groups that do not finto any other Avalon type.
 					These signals can be interconnected inside a Qsys system or exported to other modules or FPGA pins.\\
 				\hline
-				Avalon Tri-State Conduit Interface
+				Tri-State Conduit Interface
 					& Supports off-chip peripherals. Multiple peripherals can share pins through signal multiplexing.\\
 				\hline
-				Avalon Interrupt Interface
+				Interrupt Interface
 					& Supports interrupts in order to signal events to other components.\\
 				\hline
-				Avalon Clock Interface
+				Clock Interface
 					& Drives or receives clocks.\\
 				\hline
-				Avalon Reset Interface
+				Reset Interface
 					& drives or receives resets.\\
 				\hline	
 			\end{tabular}

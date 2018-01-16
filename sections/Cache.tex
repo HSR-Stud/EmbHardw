@@ -6,7 +6,7 @@
 	\subsection{Cache Types}
 		\begin{table}[H]
 			\centering
-			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+			\begin{tabular}{|>{\bfseries}p{0.3\linewidth}|p{0.65\linewidth}|}
 				\hline
 				Level 1 Cache
 					& Cache that is located closest to the processor. Usually on-chip memory. Also called first level, primary or L1 cache.\\
@@ -25,14 +25,14 @@
 	
 		\begin{table}[H]
 			\centering
-			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+			\begin{tabular}{|>{\bfseries}p{0.3\linewidth}|p{0.65\linewidth}|}
 				\hline
 				\multicolumn{2}{|c|}{Controller is looking for a memory item}\\
 				\hline
-				\textbf{Cache hit}
+				Cache hit
 					& Memory item is found in cache. Controller can be served faster than without cache due to the its proximity to the controller.\\
 				\hline
-				\textbf{Cache miss}
+				Cache miss
 					& Memory item is not found in cache. Controller is served slower than without Cache due to the checking of the cache before looking in the memory. The \textbf{cache directory} will decide whether a copy of the required datum is in the memory and the \textbf{cache controller} will manage the interaction with system memory, formulated by \textbf{cache policies}. When loading data, it will also be loaded into the cache.\\
 				\hline
 			\end{tabular}
@@ -43,12 +43,12 @@
 		\subsubsection{Cache Addressing in Direct Mapped Cache}
 			\begin{table}[H]
 				\centering
-				\begin{tabular}{|p{0.2\linewidth}|p{0.75\linewidth}|}
+				\begin{tabular}{|>{\bfseries}p{0.2\linewidth}|p{0.75\linewidth}|}
 					\hline
-					\textbf{Line number}
+					Line number
 						& Represents the lowest significant bits of the main memory address. It is unique over the whole cache and thus the size depends on the cache. Therefore only one datum of each with the same address in the main memory can be represented in the cache.\\
 					\hline
-					\textbf{Address Tag}
+					Address Tag
 						& Represents the most significant bits of the main memory address (Complete address without cache line number).\\
 					\hline
 				\end{tabular}
@@ -138,12 +138,12 @@
 		\subsubsection{Reading from Cache}
 			\begin{table}[H]
 				\centering
-				\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+				\begin{tabular}{|>{\bfseries}p{0.3\linewidth}|p{0.65\linewidth}|}
 					\hline
-					\textbf{Look-aside implementation}
+					Look-aside implementation
 						& All signals are access main memory, regardless of hit or miss.\\
 					\hline
-					\textbf{Look-through / in-line implementation}
+					Look-through / in-line implementation
 						& Cache controller decides whether to initiate system memory read/write. Massively reduces CPU-required bandwidth at the cost of \textbf{lookup penalty} (time required to decide that system memory access is required). \\
 					\hline
 				\end{tabular}
@@ -153,12 +153,12 @@
 		\subsubsection{Writing to Cache}
 			\begin{table}[H]
 				\centering
-				\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+				\begin{tabular}{|>{\bfseries}p{0.3\linewidth}|p{0.65\linewidth}|}
 					\hline
-					\textbf{Write-through policy}
+					Write-through policy
 						& Both the cache and system memory are updated in order to avoid cache coherence problems.\\
 					\hline
-					\textbf{Copy-back policy}
+					Copy-back policy
 						& Only the cache data is updated. This causes cache coherence problems. Simplest method is to set a dirty bit in the cache. When a cache line is replaced the system memory is updated with the new value in the cache (Data is evicted).\\
 					\hline
 				\end{tabular}
@@ -187,24 +187,43 @@
 			
 			\begin{table}[H]
 				\centering
-				\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+				\begin{tabular}{|>{\bfseries}p{0.3\linewidth}|p{0.65\linewidth}|}
 					\hline
-					\textbf{Loop Interchange}
+					Loop Interchange
 						& Interchange loop indices. Instead of iterating row-wise iterate column-wise or the other way around.\\
 					\hline
-					\textbf{Loop Fusion}
+					Loop Fusion
 						& Combine multiple loops into one. \\
 					\hline
-					\textbf{Loop Blocking/Tiling}
+					Loop Blocking/Tiling
 						& Instead of iterating column or row wise, iterate in blocks or tiles. (This causes more loops than row or column wise)\\
+					\hline
 				\end{tabular}
 				\caption{Loop Transformations}
 			\end{table}
 			
 			\todo{Add source code and/or images for loop transformations.}
 			
-	\subsection{Cache Coherence}
-		\subsubsection{Cache Snooping Protocol MSI}
+	\subsection{Cache Coherence \weekDoran{5}}
+		\subsubsection{Cache Snooping Protocol MSI \weekPageDoran{5}{11-14}}
+			A coherency controller (the snooper) monitors (snoops) the bus transactions and checks if any data modifications are made to data that is present in the snooper's cache.
+			
+			\paragraph{General}
+			\begin{itemize}
+			  	\item \textbf{Write-invalidate snooping protocol:} When processor writes to shared cache block, the block in all other caches is invalidated through bus snooping. Another possibility is \textbf{Write-update snooping} (uncommon due to high bus traffic). 
+			  	\item Single writer, multiple readers
+			  	\item Time is divided into epochs
+			  	\item In an epoch:
+			  		\begin{itemize}
+			  	  		\item Single core may write (rw)
+			  	  		\item multiple cores may read (ro)
+			  	 	\end{itemize}
+				\item Core reads: send a message to ensure that no other cores are in an rw state
+				\item Messages end any rw or ro epoch
+				\item When shared data is modified, the changes need to be propagated to all caches which have a copy of the data.
+			\end{itemize}
+			
+			\paragraph{States}
 			\begin{table}[H]\centering
 				\begin{tabular}{|>{\bfseries}p{0.1\textwidth}|p{0.36\textwidth}|>{\bfseries}p{0.1\textwidth}|p{0.36\textwidth}|}
 					\hline
@@ -233,3 +252,18 @@
 				\includegraphics[scale=0.5]{./pictures/MSIProtocol.png}
 				\caption{MSI Protocol cache line states}
 			\end{figure}
+			
+			\paragraph{Transactions}
+			
+			\begin{tabular}{|>{\bfseries}p{0.3\textwidth}|p{0.65\textwidth}|}
+				\hline
+				Read miss
+					& If another cache contains a dirty value of the datum, it is set to ''valid'' and the copy is sent to the requesting node.\\
+					& Values that are initially loaded to cache are set to ''valid''.\\
+				\hline
+				Write miss
+					& If the local cache line is invalid, the CPU experiences a write miss.\\
+					& The data is written to the local cache.\\
+					& Copies of the datum in other caches are set to ''invalid''.\\ 
+				\hline
+			\end{tabular}

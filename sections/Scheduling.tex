@@ -9,15 +9,15 @@
 	
 	\subsection{Scheduling Time Measurements}
 	\begin{table}[H]\centering
-		\begin{tabular}{|p{0.25\linewidth}|p{0.7\linewidth}|}
+		\begin{tabular}{|>{\bfseries}p{0.25\linewidth}|p{0.7\linewidth}|}
 			\hline
-				\textbf{Slack}
+				Slack
 					& The time that is left until the maximum cycle time is reached.\\
 			\hline
-				\textbf{Idle time}
+				Idle time
 					& The time that the CPU is waiting for other elements to finish their tasks.\\
 			\hline
-				\textbf{Maximum task scaling factor}
+				Maximum task scaling factor
 					& The factor, by which the time spent in the CPU's tasks can be multiplied so that the idle time is exactly the time that the other elements require while the CPU is idle: \newline 
 					{\Large $T_{IdleNew} = T_{CycleMax} - x \cdot T_{CPU} = T_{OtherElem}$} \newline 
 					{\Large $x = \frac{T_{CycleMax} - T_{OtherElem}}{T_{CPU}}$} \newline
