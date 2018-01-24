@@ -88,6 +88,9 @@
 				Each instruction can be completed in one clock cycle.
 					& Execution time of an instruction depends largely on where data is stored and many other factors.\\
 				\hline
+				Fixed instruction length and format.
+					& Variable instruction length and format.\\
+				\hline
 			\end{tabular}
 		\end{table}		
 		
@@ -121,4 +124,123 @@
 						\includegraphics[width=0.45\textwidth]{./pictures/controlHazard.png}\\
 				\hline
 			\end{longtable}
+		
+		\begin{minipage}[t][7cm]{0.475\textwidth}
+			\subsubsection{Superpipelining}
+			Superpipelining is the division of stages in substages, and thus increases the number of instructions that are supported at a given moment. By dividing each stage into two substages, the clock cycle period will be halved.
+			\vfill
+			\begin{figure}[H]\centering
+				\includegraphics[width=\textwidth]{./pictures/superpipelined.png}
+			\end{figure}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t][7cm]{0.475\textwidth}
+			\subsubsection{Superscalar}
+			Superscalar architectures allow multiple instructions per clock cycle by running multiple pipelines in parallel.
+			\vfill
+			\begin{figure}[H]\centering
+				\includegraphics[width=\textwidth]{./pictures/superscalar.png}
+			\end{figure}
+		\end{minipage}		
+		
+		
+		\subsubsection{Pipelining Limitations}
+			\begin{table}[H]\centering
+				\begin{tabular}{|>{\bfseries}p{0.2\textwidth}|p{0.75\textwidth}|}
+					\hline
+					Resource conflicts:
+						& \textbf{Occur when} two or more resources compete for the same resource at the same time. Superscalar architectures try to resolve resource conflicts by introducing multiple pipelines in parallel.\\
+					\hline
+					Control (procedural) dependency:
+						& \textbf{Occurs because} of branch instructions. In order to identify the next instruction, the current one has to be decoded first.\\
+					\hline
+					Data conflicts:
+						& \textbf{Occur because} of data dependencies between instructions.\newline
+							\textbf{True data dependency:} output of one instruction is required as an input to another instruction.\newline
+							\textbf{Output dependency:} two instructions are writing to the same location.\newline
+							\textbf{Antidependency:} instruction uses a location an operand while a following one is writing into that location.\\
+					\hline
+				\end{tabular}
+				\caption{Pipelining execution limitations}
+				\label{tab:pipeliningLimitations}
+			\end{table}
+			
+		\subsubsection{Execution Policies}
+			\begin{longtable}{|>{\bfseries}p{0.2\textwidth}|p{0.4\textwidth}|p{0.35\textwidth}|}
+				\hline
+				Example code:
+					&
+					& \vspace{0pt}
+					
+						\includegraphics[width=0.35\textwidth]{./pictures/exampleCodeExecutionPolicies.png}\\
+				\hline
+				In-order issue,\newline in-order completion
+					& Instruction are issued and completed in the same order as they would be in sequential execution. 
+					& \vspace{0pt}
+					
+						\includegraphics[width=0.35\textwidth]{./pictures/policyInOrderInOrder.png}\\
+				\hline
+				In-order issue,\newline out-of-order completion
+					& Instruction are issued in the same order as they would be in sequential execution, but may be completed in a different order.\newline
+						\textbf{In case of a conflict} no new instruction can be issued until it has been resolved.
+					& \vspace{0pt}
+					
+						\includegraphics[width=0.35\textwidth]{./pictures/policyInOrderOutOfOrder.png}\\
+				\hline
+				Out-of-order issue,\newline out-of-order completion
+					& Instruction can be issued and completed in a different order as they would be in sequential execution.\newline
+						Using this policy, the compiler has to deal with all of the possible data conflicts described in table \ref{tab:pipeliningLimitations}.
+					& \vspace{0pt}
+					
+						\includegraphics[width=0.35\textwidth]{./pictures/policyOutOfOrderOutOfOrder.png}\\
+				\hline
+			\end{longtable}
+			
+		\subsubsection{VLIW Processors}
+			\begin{longtable}{|>{\bfseries}p{0.18\textwidth}|p{0.8\textwidth}|}
+				\hline
+				Very Large\newline Instruction Word
+					& Detection of instructions that can be parallelised during compile-time and packs them into one large instruction, and corresponding operations are executed in parallel. Detection is based on global analysis of the programme.\\
+				\hline
+				Advantages:
+					& Simple hardware, number of FUs can be increased without additional sophisticated hardware.\\
+				\hline
+				Problems:
+					& \begin{itemize}
+					    \item Large number of registers necessary in order to store all operands and results for FUs.
+					    \item High bandwidth necessary for data transport.
+					    	E.g.: one instruction with $7$ operations and $24$Bits each \textrightarrow\ $168$Bits per instruction.
+					    \item Large code size
+					    \item Binary code incompatibility between processor versions.
+					\end{itemize}\\
+				\hline
+			\end{longtable}			
+			
+		\subsubsection{DSPs}
+			\begin{longtable}{|>{\bfseries}p{0.18\textwidth}|p{0.8\textwidth}|}
+				\hline
+				Digital Signal\newline Processors
+					& Designed to execute a large number of arithmetic operations in as short a time as possible.\\
+				\hline
+				Architecture:
+					& Modified Harvard architecture. Shared physical memory bus, but use of cache allows to separate data and code accesses.\\
+				\hline
+				\multicolumn{2}{|l|}{\textbf{Core functional units:}}\\
+				\hline
+				.M
+					& Multiply and accumulate.\\
+				\hline
+				.D
+					& Data access.\\
+				\hline
+				.L
+					& ALU.\\
+				\hline
+				.S
+					& Shifter/ALU.\\
+				\hline
+			\end{longtable}	
+		
+		DSPs are in general not compiler friendly, and over $50\%$ of 	
+			
 		
