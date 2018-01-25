@@ -31,7 +31,28 @@ tlmgr install   \
   exam          \
   amsfonts      \
   stmaryrd      \
-  amsmath
+  amsmath		\
+  ngerman		\
+  english		\
+  automark		\
+  tabularx		\
+  caption		\
+  subcaption	\
+  enumitem		\
+  xcolor		\
+  hyperref		\
+  listings		\
+  amssymb		\
+  mathtools		\
+  mathabx		\
+  bm			\
+  tikz			\
+  geometry		\
+  longtable		\
+  hhline		\
+  textcomp		\
+  float			\
+  colortbl
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
