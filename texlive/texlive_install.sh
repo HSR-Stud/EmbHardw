@@ -29,7 +29,7 @@ tlmgr install luatex
 # texlive-latex-base is needed to run pdflatex
 tlmgr install   \
   texliveonfly	\
-  babel-ngerman
+  babel-german
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
