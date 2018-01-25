@@ -5,6 +5,7 @@ cache:
     - /tmp/texlive
     - $HOME/.texlive
 script:
+- texliveonfly ./TSM_EmbHardw.tex
 - pdflatex -interaction=nonstopmode ./TSM_EmbHardw.tex
 - pdflatex -interaction=nonstopmode ./TSM_EmbHardw.tex
 deploy:

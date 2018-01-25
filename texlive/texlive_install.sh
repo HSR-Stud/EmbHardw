@@ -28,31 +28,7 @@ tlmgr install luatex
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # texlive-latex-base is needed to run pdflatex
 tlmgr install   \
-  exam          \
-  amsfonts      \
-  stmaryrd      \
-  amsmath		\
-  ngerman		\
-  english		\
-  automark		\
-  tabularx		\
-  caption		\
-  subcaption	\
-  enumitem		\
-  xcolor		\
-  hyperref		\
-  listings		\
-  amssymb		\
-  mathtools		\
-  mathabx		\
-  bm			\
-  tikz			\
-  geometry		\
-  longtable		\
-  hhline		\
-  textcomp		\
-  float			\
-  colortbl
+  texliveonfly
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
