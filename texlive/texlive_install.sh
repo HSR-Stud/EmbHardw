@@ -28,7 +28,8 @@ tlmgr install luatex
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # texlive-latex-base is needed to run pdflatex
 tlmgr install   \
-  texliveonfly
+  texliveonfly	\
+  babel-ngerman
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
