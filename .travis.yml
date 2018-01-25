@@ -1,11 +1,12 @@
 before_install:
  - source ./texlive/texlive_install.sh
+ - tlmgr install babel-german
 cache:
   directories:
     - /tmp/texlive
     - $HOME/.texlive
 script:
-- texliveonfly ./TSM_EmbHardw.tex
+- texliveonfly --engine=pdflatex ./TSM_EmbHardw.tex
 - pdflatex -interaction=nonstopmode ./TSM_EmbHardw.tex
 - pdflatex -interaction=nonstopmode ./TSM_EmbHardw.tex
 deploy:
