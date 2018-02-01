@@ -20,26 +20,39 @@
 		\end{table}
 	
 	\subsection{Elements of an FPGA \weekMaehne{1}}
-		\begin{multicols}{2}
-			\textbf{Look-Up-Table (LUT:)} Any logic function can be expressed as a sum of products. \\
-			\includegraphics[width=0.4\textwidth]{./pictures/LUT.png} \\
-			\textbf{Basic Logic Element (BLE) or Logic Cell:} \\
-			\includegraphics[width=0.4\textwidth]{./pictures/ble.png} \\
-			\textbf{Switch Box (SB), Connection Box (CB):} \\
-			\includegraphics[width=0.4\textwidth]{./pictures/sb.png} \\
-			\textbf{Configurable Logic Block (CLB):} \\
-			\includegraphics[width=0.4\textwidth]{./pictures/clb.png} \\ 		
-			\textbf{Input/Output block (IOB):}  \\
-			\includegraphics[width=0.4\textwidth]{./pictures/iob.png} \\
-			\textbf{Dedicated Blocks (DBs):} \\
-			Configurable specialized blocks implementing commonly needed functionality efficiently
-			\begin{compactitem}
-				\item Block SRAM
-				\item Digital Clock Manager (DCM), DLL, PLL
-				\item Multiplier
-				\item DSP block
-				\item Complete CPU cores
-			\end{compactitem}
-		\end{multicols}
+		\begin{longtable}{|p{0.475\textwidth}|p{0.475\textwidth}|}
+			\hline
+			\textbf{Look-Up-Table (LUT:)}
+			
+			Any logic function can be expressed as a sum of products.
+				
+				\includegraphics[width=0.4\textwidth]{./pictures/LUT.png}
+				& \textbf{Basic Logic Element (BLE) or Logic Cell:}
+				
+					\includegraphics[width=0.4\textwidth]{./pictures/ble.png}\\
+			\hline
+			\textbf{Switch Box (SB), Connection Box (CB):}
+			
+				\includegraphics[width=0.4\textwidth]{./pictures/sb.png}
+				& \textbf{Configurable Logic Block (CLB):}
+				
+				\includegraphics[width=0.4\textwidth]{./pictures/clb.png} \\
+			\hline		
+			\textbf{Input/Output block (IOB):}
+			
+				\includegraphics[width=0.4\textwidth]{./pictures/iob.png}
+				& \textbf{Dedicated Blocks (DBs):}
+				
+				Configurable specialized blocks
+				implementing commonly needed functionality efficiently
+				\begin{compactitem}
+					\item Block SRAM
+					\item Digital Clock Manager (DCM), DLL, PLL
+					\item Multiplier
+					\item DSP block
+					\item Complete CPU cores
+				\end{compactitem}\\
+			\hline
+		\end{longtable}
 		
 	
