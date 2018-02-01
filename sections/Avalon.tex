@@ -31,10 +31,10 @@
 		
 	\subsection{Avalon Memory Mapped Interface \avIntSp{13}}
 		Memory mapped interfaces are components that are mapped into the global memory space. Typically the necessary amount of memory equals the space required by the component's registers. The system allocates the amount of memory to the component as can be addressed by the width of the address bus input. If the component is a memory mapped memory, the address directly represents the address location of the data (not a register).
-		
+			
 		\subsubsection{Avalon MM Signals \avIntSp{15-19} \weekPageMaehne{3}{8}}
-			Some remarks to Avalon MM Signals. For a complete listing see \avIntSp{15-19}.
-			\begin{longtable}{|p{0.15\linewidth}||p{0.22\linewidth}|p{0.53\linewidth}|}					
+			%Some remarks to Avalon MM Signals. For a complete listing see \avIntSp{15-19}.
+			\begin{longtable}{|p{0.12\linewidth}||p{0.22\linewidth}|p{0.56\linewidth}|}					
 				\hline
 				\textbf{Signal}
 					& \textbf{Description}
@@ -71,6 +71,37 @@
 					& Must be asserted for $n$ clock cycles (not necessarily consecutively) for each of the $n$ \texttt{readData} terms of a burst transfer.\\
 				\hline
 			\end{longtable}
+		
+		\subsubsection{Read and Write Transfers with fixed cycle-delay \avIntSp{27} \weekPageMaehne{3}{10}}
+		\begin{multicols}{2}
+			\begin{compactenum}
+				\item \texttt{address}, \texttt{byteenable} and \texttt{read} are asserted after the rising edge of \texttt{clk}.
+				\item The next rising edge of \texttt{clk} mrarks the end of the first and only wait-state-cycle. The \texttt{readWaitTime} is 1.
+				\item The Slave asserts \texttt{readData} and \texttt{response}.
+				\item \texttt{readData} and \texttt{response} are read by the master, completing the transfer.
+				
+				\item \texttt{address}, \texttt{byteenable} and \texttt{write} are asserted after the rising edge of \texttt{clk}.
+				\item Slave reads \texttt{writeData}. The write transfer ends after 2 wait-state cycles.
+			\end{compactenum}
+			\begin{tikztimingtable}
+				\texttt{clk} 			& LHLHLHLHLHLHL \\
+				\texttt{address} 		& UDDDDUUDDDDUU \\
+				\texttt{byteenable} 	& UDDDDUUDDDDUU \\
+				\texttt{read} 			& LHHHHLLLLLLLL \\
+				\texttt{write} 			& LLLLLLLHHHHLL \\
+				\texttt{readData}		& UUUDDUUUUUUUU \\
+				\texttt{response}		& UUUDDUUUUUUUU \\
+				\texttt{writeData}		& UUUUUUUDDDDUU \\
+				\extracode
+				% Add vertical lines in two colors
+				\begin{pgfonlayer}{background}
+					% Add background grid lines
+					\begin{scope}[gray,semitransparent,semithick,dotted]
+						\vertlines{1,3,5,7,9,11,13}
+					\end{scope}
+				\end{pgfonlayer}
+			\end{tikztimingtable} \\
+		\end{multicols}
 			
 		\subsubsection{Read and Write Transfers with \texttt{waitRequest} \avIntSp{23} \weekPageMaehne{3}{11}}	
 			\begin{multicols}{2}
@@ -88,56 +119,28 @@
 					\item Slave reads \texttt{writeData}. \texttt{writeData} is valid until the next rising edge of \texttt{clk} after \texttt{waitRequest} is deasserted.
 				\end{compactenum}
 			\begin{tikztimingtable}
-				\texttt{clk} 			& LHLMLHLHLMLHLMLHLHL \\
-				\texttt{address} 		& UDDMDDDUUMUDDMDDDUU \\
-				\texttt{byteenable} 	& UDDMDDDUUMUDDMDDDUU \\
-				\texttt{read} 			& LHHMHHHLLMLLLMLLLLL \\
-				\texttt{write} 			& LLLMLLLLLMLHHMHHHLL \\
-				\texttt{waitRequest}	& LHHMHLLLLMLHHMHLLLL \\
-				\texttt{readData}		& UUUMUDDUUMUUUMUUUUU \\
-				\texttt{response}		& UUUMUDDUUMUUUMUUUUU \\
-				\texttt{writeData}		& UUUMUUUUUMUUUMUDDUU \\
+				\texttt{clk} 			& LHLMLHLHLMLHLMLHLHLHL \\
+				\texttt{address} 		& UDDMDDDUUUUMUDDMDDDUU \\
+				\texttt{byteenable} 	& UDDMDDDUUUUMUDDMDDDUU \\
+				\texttt{read} 			& LHHMHHHLLLLMLLLMLLLLL \\
+				\texttt{write} 			& LLLMLLLLLLLMLHHMHHHLL \\
+				\texttt{waitRequest}	& LHHMHLLLLLLMLHHMHLLLL \\
+				\texttt{readData}		& UUUMUUUDDUUMUUUMUUUUU \\
+				\texttt{response}		& UUUMUUUDDUUMUUUMUUUUU \\
+				\texttt{readDataValid}	& LLLMLLLHHLLMLLLMLLLLL \\
+				\texttt{writeData}		& UUUMUUUUUUUMUDDMDDDUU \\
 				\extracode
 				% Add vertical lines in two colors
 				\begin{pgfonlayer}{background}
 					% Add background grid lines
 					\begin{scope}[gray,semitransparent,semithick,dotted]
-						\vertlines{1,3,5,7,9,11,13,15,17}
+						\vertlines{1,3,5,7,9,11,13,15,17,19}
 					\end{scope}
 				\end{pgfonlayer}
 			\end{tikztimingtable}	\\ \\ \\ \\ \\
 		\end{multicols}			
 
-		\subsubsection{Read and Write Transfers with fixed cycle-delay \avIntSp{23} \weekPageMaehne{3}{10}}
-			\begin{multicols}{2}
-				\begin{compactenum}
-					\item \texttt{address}, \texttt{byteenable} and \texttt{read} are asserted after the rising edge of \texttt{clk}.
-					\item The next rising edge of \texttt{clk} mrarks the end of the first and only wait-state-cycle. The \texttt{readWaitTime} is 1.
-					\item The Slave asserts \texttt{readData} and \texttt{response}.
-					\item \texttt{readData} and \texttt{response} are read by the master, completing the transfer.
-					
-					\item \texttt{address}, \texttt{byteenable} and \texttt{write} are asserted after the rising edge of \texttt{clk}.
-					\item Slave reads \texttt{writeData}. The write transfer ends after 2 wait-state cycles.
-				\end{compactenum}
-				\begin{tikztimingtable}
-					\texttt{clk} 			& LHLHLHLHLHLHL \\
-					\texttt{address} 		& UDDDDUUDDDDUU \\
-					\texttt{byteenable} 	& UDDDDUUDDDDUU \\
-					\texttt{read} 			& LHHHHLLLLLLLL \\
-					\texttt{write} 			& LLLLLLLHHHHLL \\
-					\texttt{readData}		& UUUDDUUUUUUUU \\
-					\texttt{response}		& UUUDDUUUUUUUU \\
-					\texttt{writeData}		& UUUUUUUDDDDUU \\
-					\extracode
-					% Add vertical lines in two colors
-					\begin{pgfonlayer}{background}
-						% Add background grid lines
-						\begin{scope}[gray,semitransparent,semithick,dotted]
-							\vertlines{1,3,5,7,9,11,13}
-						\end{scope}
-					\end{pgfonlayer}
-				\end{tikztimingtable} \\
-			\end{multicols}
+		
 		
 		\subsubsection{Avalon MM Slave}
 			
