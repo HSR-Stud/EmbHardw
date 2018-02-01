@@ -1,6 +1,5 @@
 library ieee;
 use ieee.std_logic_1164.all;
-
 entity simplePIO is
   port(
 -- Avalon interfaces signals
@@ -14,15 +13,11 @@ entity simplePIO is
 -- Parallel Port external interface
     ParPort_DIO  : inout std_logic_vector(7 downto 0));
 end entity simplePIO;
-
-
-
 architecture NoWait of simplePIO is
   signal RegDir_D  : std_logic_vector (7 downto 0);
   signal RegPort_D : std_logic_vector (7 downto 0);
   signal RegPin_D  : std_logic_vector (7 downto 0);
 begin  -- architecture NoWait
-
   pRegWr : process(Clk_CI, Reset_RLI)
   begin
     if Reset_RLI = '0' then
@@ -46,7 +41,6 @@ begin  -- architecture NoWait
       end if;
     end if;
   end process pRegWr;
-
   -- Read from registers with wait 0
   with Address_DI select
     ReadData_DO <=
@@ -54,7 +48,6 @@ begin  -- architecture NoWait
     RegPin_D        when "001",
     RegPort_D       when "010",
     (others => '0') when others;
-
   -- Parallel port output value
   pPort : process(RegDir_D, RegPort_D)
   begin
@@ -66,8 +59,6 @@ begin  -- architecture NoWait
       end if;
     end loop;
   end process pPort;
-
   -- Parallel port input value
   RegPin_D <= ParPort_DIO;
-
 end architecture NoWait;

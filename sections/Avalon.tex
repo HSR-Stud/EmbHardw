@@ -137,17 +137,32 @@
 						\vertlines{1,3,5,7,9,11,13,15,17,19}
 					\end{scope}
 				\end{pgfonlayer}
-			\end{tikztimingtable}	\\ \\ \\ \\ \\
+			\end{tikztimingtable}	\\ \\ \\
 		\end{multicols}			
-
 		
-		
-		\subsubsection{Avalon MM Slave}
+		\subsubsection{Avalon MM Slave \weekMaehne{3}}
+			\begin{multicols}{2}
+					The \texttt{simplePIO}-IP allows to interface external elements such as LEDs, buttons, switches. It has the following functionality:
+					\begin{compactitem}
+						\item Each pin can be set as input or output. The direction can be read back.
+						\item The direction is set by \texttt{RegDir}; (0 : input / 1 : output)
+						\item The state of the port can be read in at pin level by \texttt{RegPin}
+						\item The state value is stored in the register \texttt{RegPort}
+					\end{compactitem}
+				\begin{tabular}{|p{0.1\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+					\hline
+					\textbf{Addr} & \textbf{Write} & \textbf{Read} \\
+					\hline
+					0x0 & \texttt{RegDir} & \texttt{RegDir} \\ \hline
+					0x1 & - & \texttt{RegPin} \\ \hline
+					0x2 & \texttt{RegPort} & \texttt{RegPort} \\ \hline
+					0x3 & \texttt{RegSet} & - \\ \hline
+					0x4 & \texttt{RegClr} & - \\ \hline
+				\end{tabular}
+			\end{multicols}
+			\begin{multicols}{2}		
+				\lstinputlisting[style=VHDL]{./src/simplePIO.vhdl}
+			\end{multicols}			
 			
-			\lstinputlisting[style=VHDL, caption=simplePIO]{./src/simplePIO.vhdl}
-			
-		\subsubsection{Avalon MM Master}
-		
-		
-		
-			
+%		\subsubsection{Avalon MM Master}
+%			\todo{Sinnvoll dieses Kapitel?, weiss nicht ob das benötigt wird}		
