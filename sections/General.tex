@@ -18,27 +18,28 @@
 				\hline
 			\end{tabular}
 		\end{table}
-		
-	\subsection{Soft-Core vs. Hard-Core Processors}
 	
-		\begin{table}[H]
-			\centering
-			\begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|}
-				 \hline
-				 \textbf{Soft-Core} 
-				 	& \textbf{Hard-Core}\\
-				 \hhline{|=|=|}
-				 Synthesised by a logic compiler in HDL  
-				 	& Fixed implementation in silicon\\
-				 \hline
-				 Can be modified according to requirements (more features, custom
-				 instructions etc.)
-				 	& No modifications possible\\
-				 \hline
-				 Speeds up to $250MHz$
-				 	& Speeds up to $>1GHz$\\
-				 \hline			
-			\end{tabular}
-		\end{table}
+	\subsection{Elements of an FPGA \weekMaehne{1}}
+		\begin{multicols}{2}
+			\textbf{Look-Up-Table (LUT:)} Any logic function can be expressed as a sum of products. \\
+			\includegraphics[width=0.4\textwidth]{./pictures/LUT.png} \\
+			\textbf{Basic Logic Element (BLE) or Logic Cell:} \\
+			\includegraphics[width=0.4\textwidth]{./pictures/BLE.png} \\
+			\textbf{Switch Box (SB), Connection Box (CB):} \\
+			\includegraphics[width=0.4\textwidth]{./pictures/SB.png} \\
+			\textbf{Configurable Logic Block (CLB):} \\
+			\includegraphics[width=0.4\textwidth]{./pictures/CLB.png} \\ 		
+			\textbf{Input/Output block (IOB):}  \\
+			\includegraphics[width=0.4\textwidth]{./pictures/IOB.png} \\
+			\textbf{Dedicated Blocks (DBs):} \\
+			Configurable specialized blocks implementing commonly needed functionality efficiently
+			\begin{compactitem}
+				\item Block SRAM
+				\item Digital Clock Manager (DCM), DLL, PLL
+				\item Multiplier
+				\item DSP block
+				\item Complete CPU cores
+			\end{compactitem}
+		\end{multicols}
 		
 	
