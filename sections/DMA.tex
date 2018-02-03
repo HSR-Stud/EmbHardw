@@ -1,9 +1,7 @@
 \section{DMA \weekDoran{3}}
 	\todo{Add also informations from Mähne, Week 5}
 	\subsection{Operation Modes}
-		\begin{table}[H]
-			\centering
-			\begin{tabular}{|p{0.3\linewidth}|p{0.65\linewidth}|}
+			\begin{longtable}{|p{0.3\linewidth}|p{0.65\linewidth}|}
 				\hline
 				\textbf{Burst Mode}
 					& Contiguous block is transferred in one. System bus and/or memory is solely reserved by the DMA.\\
@@ -17,9 +15,6 @@
 				\textbf{Flyby Mode}
 					& Transfers data in one cycle rather than the read/write cycle. Isn't supported by many controllers.\\
 				\hline
-			\end{tabular}
-			\caption{DMA Modes}
-		\end{table}	
-		
+			\end{longtable}
 	\subsection{Scatter-Gather}
 		\todo{Add info here}
