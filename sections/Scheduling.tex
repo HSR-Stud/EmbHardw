@@ -1,11 +1,13 @@
 \section{Scheduling \weekDoran{2}}
-	\begin{itemize}
-	  \item The scheduling diagram indicates how much time is necessary for each of the tasks, how much time is left until the cycle time is is reached and which system architecture element is affected by which task.
-	  \item If the same task is affected by multiple elements, that is indicated by showing that this runs at the same time, not after one another. Otherwise it should be split into multiple tasks.
-	  \item The tasks in the scheduling diagram are the same tasks as drawn in the left part of the binding diagram.
-	\end{itemize}
+	\begin{multicols}{2}		
+		\begin{compactitem}
+		  \item The scheduling diagram indicates how much time is necessary for each of the tasks, how much time is left until the cycle time is is reached and which system architecture element is affected by which task.
+		  \item If the same task is affected by multiple elements, that is indicated by showing that this runs at the same time, not after one another. Otherwise it should be split into multiple tasks.
+		  \item The tasks in the scheduling diagram are the same tasks as drawn in the left part of the binding diagram.
+		\end{compactitem}
 	
-	\includegraphics[width=0.45\textwidth]{./pictures/scheduling.png}
+		\includegraphics[width=0.35\textwidth]{./pictures/scheduling.png}
+	\end{multicols}	
 	
 	\subsection{Scheduling Time Measurements}
 	\begin{table}[H]\centering
@@ -19,8 +21,8 @@
 			\hline
 				Maximum task scaling factor
 					& The factor, by which the time spent in the CPU's tasks can be multiplied so that the idle time is exactly the time that the other elements require while the CPU is idle: \newline 
-					{\Large $T_{IdleNew} = T_{CycleMax} - x \cdot T_{CPU} = T_{OtherElem}$} \newline 
-					{\Large $x = \frac{T_{CycleMax} - T_{OtherElem}}{T_{CPU}}$} \newline
+					{$T_{IdleNew} = T_{CycleMax} - x \cdot T_{CPU} = T_{OtherElem}$} $\rightarrow$
+					{$x = \frac{T_{CycleMax} - T_{OtherElem}}{T_{CPU}}$} \newline
 					This implies that the complete cycle time is being used!\\
 			\hline
 		\end{tabular}
@@ -29,15 +31,15 @@
 	\subsection{List Scheduling}
 		The algorithm of list scheduling goes as follows:
 		
-		\begin{enumerate}
+		\begin{compactenum}
 			\item Order tasks with decreasing (static) priority.
 			\item Repeat until a valid schedule is obtained:
-			\begin{enumerate}
+			\begin{compactenum}
 			  \item Select the task with the highest priority.
 			  \item Select a resource to accommodate this task.
 			  \item If no resource can be found, select next task in the list.
-			\end{enumerate}
-		\end{enumerate}
+			\end{compactenum}
+		\end{compactenum}
 		
 		\begin{table}[H]\centering
 			\begin{tabular}{p{0.425\linewidth}p{0.425\linewidth}}
@@ -49,7 +51,7 @@
 	\subsection{First Come First Served Scheduling}
 		Is a non-preemptive scheduling technique. Starvation is not an issue, since there is no priority assigned to tasks. However, fairness is an issue because long tasks dominate.
 		\begin{figure}[H]\centering
-			\includegraphics[scale=0.6]{./pictures/firstComeFirstServe.png}
+			\includegraphics[scale=0.5]{./pictures/firstComeFirstServe.png}
 		\end{figure}
 			
 	\subsection{Round Robin Scheduling}
@@ -58,49 +60,67 @@
 		The execution time is divided up into time slices, each task gets to run for a time slice, after which the next task is allowed to do the same. This algorithm is starvation-free.
 
 		Conditions for operation:
-		\begin{itemize}
+		\begin{compactitem}
 		  \item Tasks need to be preemptive
-		\end{itemize}
+		\end{compactitem}
 		
 		\begin{figure}[H]\centering
-			\includegraphics[scale=0.6]{./pictures/roundRobin.png}
+			\includegraphics[scale=0.5]{./pictures/roundRobin.png}
 		\end{figure}
 		
 	\subsection{Rate Monotonic Scheduling}
 		Rate monotonic scheduling assigns a higher priority the highest repetition rate of a task, i.e. a task that has the shortest period has the highest priority. It is a preemptive scheduling technique.
 		
 		Conditions for operation:
-		\begin{itemize}
+		\begin{compactitem}
 		  \item Tasks need to be preemptive
 		  \item Tasks need deterministic deadlines
-		\end{itemize}
+		\end{compactitem}
 		
-		A sufficient (but not necessary) condition for a set of tasks with unique periods to be schedulable is:
-		
+		A sufficient (but not necessary) condition for a set of tasks with unique periods to be schedulable is:		
 		\begin{equation*}
 			\begin{aligned}
 				U &= \sum_{i=1}^{n} \frac{C_i}{T_i} \leq n(\sqrt[n]{2}-1)\\
 				U &= \text{CPU utilisation}\\
 				n &= \text{Number of tasks}\\
-				C_{i} &= \text{Computation time}
+				C_{i} &= \text{Computation time} \\
 				T_{i} &= \text{Release period (one period before the deadline)}\\
 			\end{aligned}
 		\end{equation*}
 		
 		Since this condition is not necessary, it means that a well designed system could still schedule these tasks with a higher CPU utilisation.
 		
-		\begin{itemize}
+		\begin{compactitem}
 		  \item At $t = 0$ all periods start running.
 		  \item A task is only interrupted if a task with higher priority is in the queue.
 		  \item A task leaves the queue when it is executed to completion or when its period starts again.
-		\end{itemize}
+		\end{compactitem}
 
 		\begin{table}[H]\centering
 			\begin{tabular}{p{0.7\linewidth}p{0.25\linewidth}}
 				\includegraphics[scale=0.45]{./pictures/rateMonotonicSched.png}
-					& \raisebox{1.25cm}{\includegraphics[scale=0.4]{./pictures/rateMonotonicCiTi.png}}\\
+					& \raisebox{1.25cm}{\includegraphics[scale=0.35]{./pictures/rateMonotonicCiTi.png}}\\
 			\end{tabular}
 		\end{table}
 		
 	\subsection{Voltage Scheduling}	
-		\todo{Add Voltage Scheduling}
+		Voltage Scheduling redcues the voltage of the processor (and hence the clock frequency) in order to save power. It saves energy to execute jobs as slowly as possible while still satisfying all timing constraints. 
+		\begin{multicols}{2}
+			\includegraphics[scale=0.75]{./pictures/voltage_scheduling_bindings.png} \\
+			The scaling factors for the tasks can be calculated as follows: \\
+			\begin{equation*}
+				\begin{aligned}
+					scale_j&=\frac{d_{destination}-r_{source}}{\sum_{i}worst\_exec\_time_i} \\
+					task\_scale_j&=\frac{d_{destination}-r_{source}-\sum_{i}worst\_exe\_time_i}{\sum_{i\_on\_processor}worst\_exec\_time_i}+1 \\
+				\end{aligned}
+			\end{equation*}
+		\end{multicols}
+	
+		\begin{longtable}{p{0.425\linewidth}p{0.425\linewidth}}
+			\includegraphics[scale=0.26]{./pictures/voltage_scheduling_1.png}
+			& \includegraphics[scale=0.35]{./pictures/voltage_scheduling_2.png}\\
+			Initial valid schedule & Task execution times multiplied by a ratio of 16/12 \\
+			\includegraphics[scale=0.35]{./pictures/voltage_scheduling_3.png}
+			& \includegraphics[scale=0.3]{./pictures/voltage_scheduling_4.png}\\
+			Task execution times multiplied by a ratio of 11/8 & Task execution times multiplied by a ratio of 7/5.5 \\
+		\end{longtable}

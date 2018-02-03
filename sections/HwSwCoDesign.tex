@@ -1,25 +1,26 @@
 \section{HW/SW Co-Design \weekDoran{1}}
 	\subsection{System Architecture Specification}
 	
-		\begin{itemize}
+		\begin{compactitem}
 		  \item Specifies the individual components of a system.
 		  \item Arrows indicate data flow
 		  \item {\color{red}\textbf{THE BUS IS AN ACTIVE ELEMENT!!!}}
 		  \item Elements that can compute things but are only used as passive components (like memory) are drawn as memories.
-		\end{itemize}
+		\end{compactitem}
 		
-		\begin{table}[H]
-			\begin{tabular}{cc}
-				\includegraphics[width=0.45\textwidth]{./pictures/systemArchDiagram.png}
-					& \includegraphics[width=0.45\textwidth]{./pictures/systemArchKey.png}
-			\end{tabular}
-		\end{table}
-		
+		\begin{multicols}{2}
+			\includegraphics[width=0.45\textwidth]{./pictures/systemArchDiagram.png} \\
+			\includegraphics[width=0.45\textwidth]{./pictures/systemArchKey.png}
+		\end{multicols}
+	
+\newpage		
+
 	\subsection{Bindings}
-		\begin{itemize}
-		  \item The left part of the binding diagram shows the program flow, with each task as a bubble and arrows that indicate the flow. 
-		  \item The right part of the binding diagram shows the system elements, with each element as a bubble. The arrows between the elements are the same data flow connections as in the system architecture diagrams.
-		  \item The arrows between the left and the right side of the binding diagram indicate which elements are affected by which tasks.
-		\end{itemize}
-		
-		\includegraphics[width=0.45\textwidth]{./pictures/bindings.png}
+		\begin{multicols}{2}
+			\includegraphics[width=0.45\textwidth]{./pictures/bindings.png} 
+			\begin{compactitem}
+			  \item The left part of the binding diagram shows the program flow, with each task as a bubble and arrows that indicate the flow. 
+			  \item The right part of the binding diagram shows the system elements, with each element as a bubble. The arrows between the elements are the same data flow connections as in the system architecture diagrams.
+			  \item The arrows between the left and the right side of the binding diagram indicate which elements are affected by which tasks.
+			\end{compactitem}		
+		\end{multicols}
