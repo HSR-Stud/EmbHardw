@@ -223,16 +223,18 @@
 			
 	\subsection{Cache Coherence \weekDoran{5}}
 		\subsubsection{Cache Snooping Protocol MSI \weekPageDoran{5}{11-14}}
-			\begin{multicols}{2}
-				\includegraphics[width=0.5\textwidth]{./pictures/cache_snooping.png} \\
-				A coherency controller (the snooper) monitors (snoops) the bus transactions and checks if any data modifications are made to data that is present in the snooper's cache. 
-				\begin{compactitem}
-					\item Cache controller monitors activity on the bus including its own activity
-					\item Processor initiates a transaction
-					\item If a read transaction on cached line then check for dirty bit and write-back
-					\item If a write transaction then invalidate own cache line
-				\end{compactitem}
-			\end{multicols}
+			\begin{tabular}{p{0.475\textwidth}p{0.475\textwidth}}
+				\vspace{0pt}
+				
+				\includegraphics[width=0.5\textwidth]{./pictures/cache_snooping.png}
+					& A coherency controller (the snooper) monitors (snoops) the bus transactions and checks if any data modifications are made to data that is present in the snooper's cache. 
+					\begin{compactitem}
+						\item Cache controller monitors activity on the bus including its own activity
+						\item Processor initiates a transaction
+						\item If a read transaction on cached line then check for dirty bit and write-back
+						\item If a write transaction then invalidate own cache line
+					\end{compactitem}\\
+			\end{tabular}
 			
 			\paragraph{General}
 			\begin{compactitem}
@@ -295,13 +297,15 @@
 			\end{tabular}
 		
 		\subsubsection{Directory based Coherence \weekPageDoran{5}{15-16}}
-				\begin{multicols}{2}
-				\includegraphics[width=0.5\textwidth]{./pictures/directory.png} \\ \ \\ \ \\
-				A directory keeps track of state an where each copy of a memory block is cached.
-				\begin{compactitem}
-					\item The directory can be distributed or centralized
-					\item The processor consults the directory before loading cache lines
-					\item When a line is updated then the directory is consulted to update or invalidate blocks
-					\item More scalable than snooping but higher latency
-				\end{compactitem}
-			\end{multicols}
+			\begin{tabular}{p{0.475\textwidth}p{0.475\textwidth}}
+				\vspace{0pt}
+				
+				\includegraphics[width=0.5\textwidth]{./pictures/directory.png}
+						& A directory keeps track of state an where each copy of a memory block is cached.
+					\begin{compactitem}
+						\item The directory can be distributed or centralized
+						\item The processor consults the directory before loading cache lines
+						\item When a line is updated then the directory is consulted to update or invalidate blocks
+						\item More scalable than snooping but higher latency
+					\end{compactitem}
+			\end{tabular}

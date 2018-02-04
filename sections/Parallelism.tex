@@ -239,8 +239,22 @@
 				.S
 					& Shifter/ALU.\\
 				\hline
-			\end{longtable}	
+			\end{longtable}
 		
-		DSPs are in general not compiler friendly, and over $50\%$ of 	
+			DSPs are in general not compiler friendly, over $50\%$ of of DSP solutions are programmed on naked hardware in assembler.
+		
+		\subsubsection{Software Pipelining}
+			The technique of scheduling instructions across several iterations of a loop. Exploits instruction level parallelism on superscalar and VLIW machines. Iterations are overlaid so that an iteration starts before the previous one has completed.
 			
-		
+		\subsubsection{Pipelining Functional Units}
+			By decreasing the clock cycle and scheduling operations across the clock cycles it is possible to save resources, although it might be that this increases the overall execution time.
+			 
+			\begin{figure}[H]\centering
+				\includegraphics[width=0.5\textwidth]{./pictures/pipeliningFunctionalUnits.png}
+				\caption{Pipelining Functional Units}
+				\label{fig:pipeliningFU}
+			\end{figure}
+			
+			
+		\subsubsection{High Level Synthesis}
+			High level synthesis is the synthesis of a high-level source code (such as C) into 
