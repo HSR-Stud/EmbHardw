@@ -7,16 +7,16 @@
 		
 		\textbf{Example mechanism:}
 		
-		\begin{enumerate}
+		\begin{compactenum}
 		  \item Processor receives unidentified instruction.
 		  \item Processor asks its co-processors whether this instruction applies to them.
-		  \begin{enumerate}
+		  \begin{compactenum}
 			  \item If it doesn't, the processor raises an unidentified op-code exception and let normal processing take over.
 			  \item If it does, the instruction is passed to the co-processor which then executes it.
 			  \item If the co-processor is busy while the processor has a co-processor instruction lined up, the processor will stall.
-		  \end{enumerate}	  
+		  \end{compactenum}	  
 		  \item The processor will continue to execute instructions while the co-processor does the same with the passed instruction.
-		\end{enumerate}
+		\end{compactenum}
 
 
 		\begin{table}[H]
@@ -24,7 +24,7 @@
 			\begin{tabular}{|p{0.425\textwidth}|p{0.425\textwidth}|}
 				\hline
 				\textbf{Loosely Coupled Co-Processors}
-					& \textbf{Loosely Coupled Co-Processors}\\
+					& \textbf{Tightly Coupled Co-Processors}\\
 				\hline
 				Access to memory and external resources via system bus.
 					& Access to memory and external resources via specialised interface.\\
@@ -145,25 +145,22 @@
 		
 		
 		\subsubsection{Pipelining Limitations}
-			\begin{table}[H]\centering
-				\begin{tabular}{|>{\bfseries}p{0.2\textwidth}|p{0.75\textwidth}|}
-					\hline
-					Resource conflicts:
-						& \textbf{Occur when} two or more resources compete for the same resource at the same time. Superscalar architectures try to resolve resource conflicts by introducing multiple pipelines in parallel.\\
-					\hline
-					Control (procedural) dependency:
-						& \textbf{Occurs because} of branch instructions. In order to identify the next instruction, the current one has to be decoded first.\\
-					\hline
-					Data conflicts:
-						& \textbf{Occur because} of data dependencies between instructions.\newline
-							\textbf{True data dependency:} output of one instruction is required as an input to another instruction.\newline
-							\textbf{Output dependency:} two instructions are writing to the same location.\newline
-							\textbf{Antidependency:} instruction uses a location an operand while a following one is writing into that location.\\
-					\hline
-				\end{tabular}
-				\caption{Pipelining execution limitations}
-				\label{tab:pipeliningLimitations}
-			\end{table}
+			\begin{longtable}{|>{\bfseries}p{0.2\textwidth}|p{0.75\textwidth}|}				
+				\hline
+				Resource conflicts:
+					& \textbf{Occur when} two or more resources compete for the same resource at the same time. Superscalar architectures try to resolve resource conflicts by introducing multiple pipelines in parallel.\\
+				\hline
+				Control (procedural) dependency:
+					& \textbf{Occurs because} of branch instructions. In order to identify the next instruction, the current one has to be decoded first.\\
+				\hline
+				\label{tab:pipeliningLimitations} % Label cannot be after the last line, otherwise some strange lines are drawn
+				Data conflicts:
+					& \textbf{Occur because} of data dependencies between instructions.\newline
+						\textbf{True data dependency:} output of one instruction is required as an input to another instruction.\newline
+						\textbf{Output dependency:} two instructions are writing to the same location.\newline
+						\textbf{Antidependency:} instruction uses a location an operand while a following one is writing into that location.\\
+				\hline				
+			\end{longtable}
 			
 		\subsubsection{Execution Policies}
 			\begin{longtable}{|>{\bfseries}p{0.2\textwidth}|p{0.4\textwidth}|p{0.35\textwidth}|}
@@ -206,13 +203,13 @@
 					& Simple hardware, number of FUs can be increased without additional sophisticated hardware.\\
 				\hline
 				Problems:
-					& \begin{itemize}
+					& \begin{compactitem}
 					    \item Large number of registers necessary in order to store all operands and results for FUs.
 					    \item High bandwidth necessary for data transport.
 					    	E.g.: one instruction with $7$ operations and $24$Bits each \textrightarrow\ $168$Bits per instruction.
 					    \item Large code size
 					    \item Binary code incompatibility between processor versions.
-					\end{itemize}\\
+					\end{compactitem}\\
 				\hline
 			\end{longtable}			
 			
@@ -251,10 +248,9 @@
 			 
 			\begin{figure}[H]\centering
 				\includegraphics[width=0.5\textwidth]{./pictures/pipeliningFunctionalUnits.png}
-				\caption{Pipelining Functional Units}
+				%\caption{Pipelining Functional Units}
 				\label{fig:pipeliningFU}
-			\end{figure}
-			
+			\end{figure}			
 			
 		\subsubsection{High Level Synthesis}
-			High level synthesis is the synthesis of a high-level source code (such as C) into 
+			High level synthesis is the synthesis of a high-level source code (such as C) into VHDL or directly downloadable code for use in an FPGA. The compiler itself decides which part of the code will be implemented in hardware and which part will be run in software.
