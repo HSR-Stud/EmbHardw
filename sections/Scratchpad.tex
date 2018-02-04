@@ -9,13 +9,13 @@
 	\subsection{Static Partitioning \weekPageDoran{3}{47}}
 		Memory is divided in different blocks (partitions). The size of the process and the size of the partition is never equal, this causes \textbf{internal fragments}. This can be reduced by making unequal partition sizes and queues for usage of these fragments. 
 	\subsection{Dynamic Partitioning \weekPageDoran{3}{48}}
-	\begin{minipage}[t]{0.65\textwidth}		
-			Dynamic partitioning creates partition with the exact same size as the processes. This solves the issue of internal fragments, but causes \textbf{external fragments}.
+		Dynamic partitioning creates partition with the exact same size as the processes. This solves the issue of internal fragments, but causes \textbf{external fragments}.
 			
-			\subsubsection{Placement Algorithms}
+		\subsubsection{Placement Algorithms}
+			\begin{minipage}[t]{0.6\textwidth}		
 				\begin{table}[H]
 					\centering
-					\begin{tabular}{|p{0.3\linewidth}|p{0.55\linewidth}|}
+					\begin{tabular}{|p{0.25\linewidth}|p{0.6\linewidth}|}
 						\hline
 						\textbf{First Fit}
 							& Scan memory from top and take first fit. Tends tobe the simplest and produces less fragmentation than \textbf{Next Fit}.\\
@@ -29,10 +29,12 @@
 					\end{tabular}
 					%\caption{Dynamic Partitioning Placement Algorithms}
 				\end{table}
-	\end{minipage}	
-	\begin{minipage}[t]{0.3\textwidth}
-		\ \\ \includegraphics[scale=0.8]{./pictures/dynamic_partitioning.png}
-	\end{minipage} \ \\ \ \\
+			\end{minipage}
+			\begin{minipage}[t]{0.4\textwidth}
+				\vspace{0pt}
+				
+				\includegraphics[width=1.1\textwidth]{./pictures/dynamic_partitioning.png}
+			\end{minipage}
 			
 	\subsection{Paging \weekPageDoran{3}{49}}
 		Process image is divided into pages of a specific size and divide available memory into frames of equal size. Management is done by a \textbf{page table} where entries are the frame numbers and the reference is the page number. 
