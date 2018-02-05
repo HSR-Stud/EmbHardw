@@ -107,11 +107,12 @@
 	\subsection{Voltage Scheduling}	
 		Voltage Scheduling reduces the voltage of the processor (and hence the clock frequency) in order to save power. It saves energy to execute jobs as slowly as possible while still satisfying all timing constraints. \\		
 	
-		%
 		\begin{longtable}{p{0.4\linewidth}p{0.55\linewidth}}
+			\vspace{0pt}
+			
 			\includegraphics[scale=0.75]{./pictures/voltage_scheduling_bindings.png}
 			&
-				\vspace{-100pt}\begin{compactenum}
+				\begin{compactenum}
 					\item Find the critical paths. In the above example the critical paths are:
 					\begin{compactitem}
 						\item Candidate 1: t1$\rightarrow$e1$\rightarrow$t2
@@ -124,10 +125,12 @@
 					\end{compactitem} 
 				\end{compactenum}\\
 			
-			\includegraphics[scale=0.26]{./pictures/voltage_scheduling_1.png} \newline
-				Initial valid schedule
+			\vspace{0pt}
+			
+			\includegraphics[scale=0.26]{./pictures/voltage_scheduling_1.png}
+			
+			Initial valid schedule
 			& 		
-				\vspace{-90pt}	
 				\begin{compactenum}
 					\setcounter{enumi}{1}
 					\item Calculate the scale for all candidates with the following formula
@@ -145,10 +148,12 @@
 					\end{compactitem}
 				\end{compactenum}\\
 				
-			\includegraphics[scale=0.35]{./pictures/voltage_scheduling_2.png} \newline
+			\vspace{0pt}
+			
+			\includegraphics[scale=0.35]{./pictures/voltage_scheduling_2.png}
+			
 				Task execution times multiplied by a ratio of 16/12 (Step 5)			
 			&
-				\vspace{-90pt}
 				\begin{compactenum}	
 					\setcounter{enumi}{2}
 					\item Select the smaller critical path $\rightarrow$ Candidate 1
@@ -161,10 +166,12 @@
 					\end{compactitem}				
 				\end{compactenum}\\				
 				
-			\includegraphics[scale=0.35]{./pictures/voltage_scheduling_3.png} \newline
-				Task execution times multiplied by a ratio of 11/8 (Step 8)			
+			\vspace{0pt}
+			
+			\includegraphics[scale=0.35]{./pictures/voltage_scheduling_3.png}
+			
+			Task execution times multiplied by a ratio of 11/8 (Step 8)			
 			&
-				\vspace{-90pt}
 				\begin{compactenum}[\ ]
 					\item As the task time of the communication task (e1) cannot be made larger or smaller the divisor consists only of the sum of the computing time of the two relevant tasks, in this case t1 and t2.
 				\end{compactenum}
@@ -177,11 +184,13 @@
 					\item Remove this path from the schedule
 					\item Get the next critical path. Because e1 is immovable, the next critical path is t3$\rightarrow$t4								
 				\end{compactenum}	\\
+			
+			\vspace{0pt}
 				
-			\includegraphics[scale=0.3]{./pictures/voltage_scheduling_4.png} \newline
-				Task execution times multiplied by a ratio of 7/5.5 (Step 11)			
+			\includegraphics[scale=0.3]{./pictures/voltage_scheduling_4.png}
+			
+			Task execution times multiplied by a ratio of 7/5.5 (Step 11)			
 			&
-				\vspace{-90pt}
 				\begin{compactenum}	
 					\setcounter{enumi}{7}
 					\item Calculate the scaling factor and scale all remaining tasks (t3, t4 and t5)
