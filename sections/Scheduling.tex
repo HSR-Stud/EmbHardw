@@ -107,6 +107,7 @@
 	\subsection{Voltage Scheduling}	
 		Voltage Scheduling reduces the voltage of the processor (and hence the clock frequency) in order to save power. It saves energy to execute jobs as slowly as possible while still satisfying all timing constraints. \\		
 	
+		%\vspace*{-\baselineskip}\vspace*{-\baselineskip}
 		\begin{longtable}{p{0.4\linewidth}p{0.55\linewidth}}
 			\vspace{0pt}
 			
@@ -123,7 +124,7 @@
 						\item Candidate 3: t3$\rightarrow$t4$\rightarrow$e2$\rightarrow$t5, pause between t4 and e2
 						\item Candidate 4: t3$\rightarrow$t4$\rightarrow$t2, pause between t4 and t2
 					\end{compactitem} 
-				\end{compactenum}\\
+				\end{compactenum}\\[-\normalbaselineskip]
 			
 			\vspace{0pt}
 			
@@ -146,7 +147,7 @@
 						\item Candidate 1: $\frac{D_{t2}-R_{t1}}{C_{t1}+C_{e1}+C_{t2}}=\frac{19-0}{6+3+6}=\frac{19}{15}$
 						\item Candidate 2: $\frac{22}{16}$
 					\end{compactitem}
-				\end{compactenum}\\
+				\end{compactenum}\\[-\normalbaselineskip]
 				
 			\vspace{0pt}
 			
@@ -164,7 +165,7 @@
 					\begin{compactitem}
 						\item Candidate 1: $\frac{D_{t2}-R_{t1}-(C_{t1}+C_{e1}+C_{t2})}{C_{t1}+C_{t2}}+1=\frac{19-0-15}{6+6}+1=\frac{16}{12}$
 					\end{compactitem}				
-				\end{compactenum}\\				
+				\end{compactenum}\\[-\normalbaselineskip]			
 				
 			\vspace{0pt}
 			
@@ -172,9 +173,9 @@
 			
 			Task execution times multiplied by a ratio of 11/8 (Step 8)			
 			&
-				\begin{compactenum}[\ ]
-					\item As the task time of the communication task (e1) cannot be made larger or smaller the divisor consists only of the sum of the computing time of the two relevant tasks, in this case t1 and t2.
-				\end{compactenum}
+				\begin{compactitem}
+					\item[] As the task time of the communication task (e1) cannot be made larger or smaller the divisor consists only of the sum of the computing time of the two relevant tasks, in this case t1 and t2.
+				\end{compactitem}
 				\begin{compactenum}	
 					\setcounter{enumi}{4}
 					\item Multiply all task times (except the communication tasks (e1 and e2)) by this factor.
@@ -183,7 +184,7 @@
 					\end{compactitem}
 					\item Remove this path from the schedule
 					\item Get the next critical path. Because e1 is immovable, the next critical path is t3$\rightarrow$t4								
-				\end{compactenum}	\\
+				\end{compactenum}	\\[-\normalbaselineskip]
 			
 			\vspace{0pt}
 				
