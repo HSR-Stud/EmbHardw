@@ -71,4 +71,51 @@
 	\subsection{Network on Chip}
 		There are three essential types of on-chip communication systems: Point to Point (P2P, a), Bus Systems (b) and Network on Chip (c). \\
 		\includegraphics[width=\linewidth]{./pictures/network.png}\\
-		NOC offers high bandwidth and scaleability.
+		NOC offer high bandwidth and scaleability as well as portability across platforms.
+		
+		\subsubsection{Switching}
+			\begin{longtable}{|>{\bfseries}p{0.2\linewidth}|p{0.75\linewidth}|}
+				\hline
+				Circuit switching
+				&
+				physical path between the source and the destination is reserved prior to the transmission of data \newline
+				Advantage: low latency transfers, once path is reserved \newline
+				Disadvantage: several links are occupied for the duration of the transmitted data, even when no data is	being transmitted \\
+				\hline
+				Packet Switching
+				&
+				packets are transmitted from source and make their way independently to receiver possibly along different routes and with different delays \newline
+				Advantage: zero start up time, followed by a variable delay due to contention in routers along packet path \newline
+				Disadvantage: QoS guarantees are harder to make in packet switching than in circuit switching\\
+				\hline
+				SAF switching
+				&
+				packet is sent from one router to the next only if the receiving router has buffer space for entire	packet \newline
+				Disadvantage: excessive buffer requirements \\
+				\hline
+				VCT Switching
+				&
+				reduces router latency over SAF switching by forwarding first flit of a packet as soon as space for	the entire packet is available in the next router \newline
+				if no space is available in receiving buffer, no flits are sent, and the entire packet is buffered same buffering requirements as SAF switching \\
+				\hline
+				WH switching
+				&
+				flit from a packet is forwarded to receiving router if space exists for that flit \newline
+				Advantage: buffer requirements are reduced to one flit, instead of an entire packet \newline
+				Disadvantage: more susceptible to deadlocks due to usage dependencies between links \\
+				\hline
+			\end{longtable}
+		
+	\subsection{Testing}
+		\begin{longtable}{|>{\bfseries}p{0.2\linewidth}|p{0.75\linewidth}|}
+			\hline
+			Black Box testing 
+			& Behavioral model required, so called golden model \\
+			\hline
+			White Box testing
+			& DUT interna is known and this knowledge is taken into account during the test \\
+			\hline
+			Gray Box testing
+			& A combination of Black and White Box testing \\
+			\hline
+		\end{longtable}
