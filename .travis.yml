@@ -14,4 +14,4 @@ deploy:
    - ./TSM_EmbHardw.pdf
   skip_cleanup: true
   on:
-    tags: false
+    tags: true
